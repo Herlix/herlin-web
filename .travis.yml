@@ -14,6 +14,8 @@ matrix:
     before_script:
       - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -f
       - cargo install wrangler
+      - yarn cache clean
+      - rm -rf node_modules
     script:
       - yarn
       - yarn build
