@@ -1,0 +1,7 @@
+name = "herlin-web-dev"
+type = "webpack"
+workers_dev=true
+
+[site]
+bucket = "./dist"
+entry-point = "worker"

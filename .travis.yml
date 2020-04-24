@@ -1,0 +1,21 @@
+language: rust
+sudo: false
+
+cache: cargo
+
+matrix:
+  include:
+  # Builds with wasm-pack.
+  - rust: stable
+    env: RUST_BACKTRACE=1
+    addons:
+      firefox: latest
+      chrome: stable
+    before_script:
+      - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -f
+      - cargo install wrangler
+    script:
+      - yarn
+      - yarn build
+      - yarn test
+      - yarn publ
