@@ -1,5 +1,5 @@
 language: rust
-sudo: false
+sudo: true
 
 cache: cargo
 
@@ -7,15 +7,18 @@ matrix:
   include:
   # Builds with wasm-pack.
   - rust: stable
-    env: RUST_BACKTRACE=1
+    env:
+      - RUST_BACKTRACE=1
+      - NODE_VERSION=12.16.2
     addons:
       firefox: latest
       chrome: stable
+
     before_script:
+      - nvm install $NODE_VERSION
       - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -f
       - cargo install wrangler
     script:
-      - npm audit fix
       - npm install
       - npm run build
       - npm run test
