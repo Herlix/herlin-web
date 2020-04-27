@@ -15,6 +15,7 @@ matrix:
       - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -f
       - cargo install wrangler
     script:
+      - npm audit fix
       - npm install
       - npm run build
       - npm run test
