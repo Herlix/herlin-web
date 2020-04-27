@@ -1,8 +1,9 @@
 const path = require('path');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanCSSPlugin = require('less-plugin-clean-css');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const distPath = path.resolve(__dirname, 'dist');
 
@@ -18,46 +19,26 @@ module.exports = (env, argv) => {
         entry: path.resolve(__dirname, 'bootstrap.js'),
         output: {
             path: distPath,
-            filename: 'bundle.js',
+            filename: 'bundle.min.js',
             webassemblyModuleFilename: 'bundle.wasm'
         },
         module: {
             rules: [
                 {
-                    test: /\.less$/,
+                    test: /\.css$/,
                     use: [
-                        {
-                            loader: MiniCssExtractPlugin.loader
-                        },
-                        {
-                            loader: 'css-loader',
-                        },
-                        {
-                            loader: 'less-loader',
-                            options: {
-                                plugins: [
-                                    new CleanCSSPlugin({ advanced: true })
-                                ]
-                            },
-                        }
+                        MiniCssExtractPlugin.loader,
+                        'css-loader',
                     ],
                 },
             ]
         },
         plugins: [
-            new CopyWebpackPlugin([
-                {
-                    from: './static',
-                    to: distPath
-                }
-            ]),
-            new WasmPackPlugin({
-                crateDirectory: '.',
-                extraArgs: '--no-typescript',
-            }),
-            new MiniCssExtractPlugin({
-                filename: 'bundle.min.css'
-            }),
+            new CleanWebpackPlugin(),
+            new MiniCssExtractPlugin({filename: 'bundle.min.css'}),
+            new WasmPackPlugin({crateDirectory: '.', extraArgs: '--no-typescript',}),
+            new OptimizeCSSAssetsPlugin({}),
+            new HtmlWebpackPlugin({title: "Portfolio test project"}),
         ],
         watch: argv.mode !== 'production'
     };
