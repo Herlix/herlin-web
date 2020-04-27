@@ -22,6 +22,10 @@ impl Component for AppModel {
         false
     }
 
+    fn change(&mut self, _props: Self::Properties) -> bool {
+        false
+    }
+
     fn view(&self) -> Html {
         html! {
             <div class="wrapper">

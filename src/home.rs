@@ -1,5 +1,5 @@
+use yew::{html, Component, ComponentLink, Href, Html, InputData, ShouldRender};
 
-use yew::prelude::*;
 pub struct HomeModel {}
 pub enum HomeMsg {}
 
@@ -15,12 +15,16 @@ impl Component for HomeModel {
         true
     }
 
+    fn change(&mut self, _props: Self::Properties) -> bool {
+        true
+    }
+
     fn view(&self) -> Html {
         html! {
             <div class="wrapper--home">
                 <div class="wrapper--home__content">
-                    <img src="/images/portrait.png" alt="Portrait" class="img__portrait"/>
-                    <h1>{"Alexander Herlin"}</h1>
+                    <img src="https://media-exp1.licdn.com/dms/image/C4D03AQF5wnUq3gVE7w/profile-displayphoto-shrink_200_200/0?e=1593648000&v=beta&t=eWJhnuAIKwu6DptXd0r3_jRTJlq7fppinByTOOS7BnY" alt="Portrait" class="img__portrait"/>
+                    <h1>{"Alexander Herlin!!"}</h1>
                 </div>
             </div>
         }

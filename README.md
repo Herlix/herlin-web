@@ -7,13 +7,13 @@ A simple Cloudflare hosted yew app!
 ### 🔬 Build & Serve locally with
 
 ```
-yarn && yarn build && yarn start:dev
+npm install && npm run build && npm run start:dev
 ```
 
 ### ☝️ Deployment
 
 ```
-yarn && yarn build && wrangler publish
+npm install && npm run build && wrangler publish
 ```
 
 ## 🔋 Batteries Included
